@@ -25,7 +25,6 @@ namespace RobinGameServer.Controllers
             return View();
         }
 
-        [HttpPost]
         [ValidateInput(false)]
         public void AddHighScore(string xml)
         {
