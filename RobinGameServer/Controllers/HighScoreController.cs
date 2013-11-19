@@ -23,5 +23,17 @@ namespace RobinGameServer.Controllers
             return View();
         }
 
+        public void AddHighScore(string xml)
+        {
+            var highScore = new HighScore
+            {
+                Name = "piet",
+                Score = 23
+            };
+
+            context.HighScores.Add(highScore);
+            context.SaveChanges();
+        }
+
     }
 }
