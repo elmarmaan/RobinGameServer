@@ -19,7 +19,7 @@ namespace RobinGameServer.Controllers
 
         public ActionResult Index()
         {
-            var highScores = context.HighScores.OrderBy(h=> h.Score);
+            var highScores = context.HighScores.OrderByDescending(h=> h.Score);
 
             ViewData.Model = highScores;
             return View();
@@ -31,16 +31,16 @@ namespace RobinGameServer.Controllers
             var document = new XmlDocument();
             document.LoadXml(xml);
 
-            var nameElement = document.GetElementById("name");
-            var scoreElement = document.GetElementById("score");
-            var keyElement = document.GetElementById("key");
+            var nameElement = document.FirstChild["name"];
+            var scoreElement = document.FirstChild["score"];
+            var keyElement = document.FirstChild["key"];
 
             if (nameElement != null && scoreElement != null && keyElement != null)
             {
-                if (keyElement.Value == "123456abcdefg")
+                if (keyElement.InnerText == "123456abcdefg")
                 {
-                    var name = nameElement.Value;
-                    var score = Convert.ToInt32(scoreElement.Value);
+                    var name = nameElement.InnerText;
+                    var score = Convert.ToInt32(scoreElement.InnerText);
 
                     var highScore = new HighScore
                     {
